@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MeteMVC.Models;
 using MeteMVC.Utility;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MeteMVC.Controllers
 {
+    [Authorize(Roles = UserRoles.Role_Admin)]
+
     public class KitapTuruController : Controller
     {
 

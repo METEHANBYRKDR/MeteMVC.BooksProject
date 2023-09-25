@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MeteMVC.Models;
 using MeteMVC.Utility;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MeteMVC.Controllers
 {
@@ -20,14 +21,18 @@ namespace MeteMVC.Controllers
             _kitapTuruRepository = kitapTuruRepository;
             _webHostEnvironment = webHostEnvironment;
         }
+        [Authorize(Roles = "Admin,Ogrenci")]
+
         public IActionResult Index()
         {
 
-            List<Kitap> objKitapList = _kitapRepository.GetAll(includeProps:"KitapTuru").ToList();  //SQL İN İÇERSİNDEKİ VERİLERİ ÇEKTİ MVC NİN MODEL KISMI !!!1değişiklik include metoduyla kitap daki foreign keyleri getirdik KitapTuru,KitapTuruId  
+            List<Kitap> objKitapList = _kitapRepository.GetAll(includeProps: "KitapTuru").ToList();  //SQL İN İÇERSİNDEKİ VERİLERİ ÇEKTİ MVC NİN MODEL KISMI !!!1değişiklik include metoduyla kitap daki foreign keyleri getirdik KitapTuru,KitapTuruId  
             return View(objKitapList);   // Viewe göndermek için yaptık
 
 
         }
+        [Authorize(Roles = UserRoles.Role_Admin)]
+
         public IActionResult EkleGuncelle(int? id)
         {
 
@@ -55,6 +60,8 @@ namespace MeteMVC.Controllers
 
         }
         [HttpPost]
+        [Authorize(Roles = UserRoles.Role_Admin)]
+
         public IActionResult EkleGuncelle(Kitap kitap, IFormFile? file)
         {
             //modelstatee bağlı hataları bulmak için kullanıyoruz
@@ -121,6 +128,8 @@ namespace MeteMVC.Controllers
             return View();
         }
         */
+        [Authorize(Roles = UserRoles.Role_Admin)]
+
         public IActionResult Sil(int? id)
         {
             if (id == null || id == 0)
@@ -134,6 +143,8 @@ namespace MeteMVC.Controllers
             }
             return View(kitapVT);
         }
+        [Authorize(Roles = UserRoles.Role_Admin)]
+
         [HttpPost, ActionName("Sil")]
         public IActionResult SilPOST(int id)
         {

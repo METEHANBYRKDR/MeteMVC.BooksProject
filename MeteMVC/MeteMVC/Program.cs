@@ -1,8 +1,8 @@
 using MeteMVC.Utility;
 using Microsoft.EntityFrameworkCore;
-
-using MeteMVC.Utility;
 using MeteMVC.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,11 +11,18 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<UygulamaDbContext>
     (options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-//bunun sayesinde newlememize gerek kalmýyor dependency injection SOLÝ(D)
 
-//_kitapTuruRepository nesnesini oluþturmamýzý saðlýyo Dependency Injection
+builder.Services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<UygulamaDbContext>()   //role ekledigimiz iÃ§in identity role ekledik
+    .AddDefaultTokenProviders(); 
+builder.Services.AddRazorPages(); //Razorpage Kullanmak iÃ§in yaptÄ±k
+//bunun sayesinde newlememize gerek kalmï¿½yor dependency injection SOLï¿½(D)
+
+//_kitapTuruRepository nesnesini oluï¿½turmamï¿½zï¿½ saï¿½lï¿½yo Dependency Injection
 builder.Services.AddScoped<IKitapRepository, KitapRepository>();
 builder.Services.AddScoped<IKitapTuruRepository, KitapTuruRepository>();
+builder.Services.AddScoped<IKiralamaRepository, KiralamaRepository>();
+
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 var app = builder.Build();
 
@@ -33,6 +40,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.MapRazorPages();  //Razorpage Kullanmak iÃ§in yaptÄ±k
 
 app.MapControllerRoute(
     name: "default",

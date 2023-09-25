@@ -21,8 +21,16 @@
       "PackagePath": "staticwebassets\\img\\Lev Tolstoy Bilgelik Kitabı.jpg"
     },
     {
+      "Id": "C:\\Users\\Mete\\source\\repos\\MeteMVC\\MeteMVC\\wwwroot\\img\\Libary.jpg",
+      "PackagePath": "staticwebassets\\img\\Libary.jpg"
+    },
+    {
       "Id": "C:\\Users\\Mete\\source\\repos\\MeteMVC\\MeteMVC\\wwwroot\\img\\MeteFoto.jpg",
       "PackagePath": "staticwebassets\\img\\MeteFoto.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Mete\\source\\repos\\MeteMVC\\MeteMVC\\wwwroot\\img\\mete insta.jpg",
+      "PackagePath": "staticwebassets\\img\\mete insta.jpg"
     },
     {
       "Id": "C:\\Users\\Mete\\source\\repos\\MeteMVC\\MeteMVC\\wwwroot\\js\\site.js",
